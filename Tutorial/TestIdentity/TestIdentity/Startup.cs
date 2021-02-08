@@ -1,17 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityServer4.Models;
-using IdentityServer4.Test;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ThinKore.Identity.Api.InMemory;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using TestIdentity.Configuration;
 
-namespace ThinKore.Identity.Api
+namespace TestIdentity
 {
     public class Startup
     {
@@ -21,9 +19,9 @@ namespace ThinKore.Identity.Api
         {
             services.AddIdentityServer()
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
-                .AddTestUsers(InMemoryConfig.GetUsers())
-                .AddInMemoryClients(InMemoryConfig.GetClients())
-                .AddDeveloperSigningCredential(); //not something we want to use in a production environment;;           
+        .AddTestUsers(InMemoryConfig.GetUsers())
+        .AddInMemoryClients(InMemoryConfig.GetClients())
+        .AddDeveloperSigningCredential();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,13 +33,6 @@ namespace ThinKore.Identity.Api
             }
 
             app.UseIdentityServer();
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapGet("/", async context =>
-            //    {
-            //        await context.Response.WriteAsync("Hello World!");
-            //    });
-            //});
         }
     }
 }
