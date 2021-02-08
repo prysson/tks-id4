@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ThinKore.Identity.DAL.SqlServer\ThinKore.Identity.DAL.SqlServer.csproj" />
+    <ProjectReference Include="..\ThinKore.Identity.Domain\ThinKore.Identity.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
