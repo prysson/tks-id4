@@ -14,7 +14,9 @@ namespace CompanyEmployees.IDP
             new IdentityResource[]
             { 
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile()
+                new IdentityResources.Profile(),
+                new IdentityResources.Address(),
+                new IdentityResource("roles", "User role(s)", new List<string> { "role" })
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -33,11 +35,17 @@ namespace CompanyEmployees.IDP
                     ClientName = "CompanyEmployeeClient",
                     ClientId = "companyemployeeclient",
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = new List<string>{ "httpd://5010/signin=oidc" },
-                    AllowedScopes = { IdentityServerConstants.StandardScopes.OpenId, IdentityServerConstants.StandardScopes.Profile },
-                    ClientSecrets = { new Secret("CompanyEMployeeCLientSecret".Sha512())},
-                    RequirePkce = false,
-                    RequireConsent = true
+                    RedirectUris = new List<string>{ "https://localhost:5010/signin-oidc" },
+                    AllowedScopes = 
+                    { 
+                        IdentityServerConstants.StandardScopes.OpenId, 
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.Address,
+                        "roles"
+                    },
+                    ClientSecrets = { new Secret("CompanyEmployeeClientSecret".Sha512())},
+                    RequirePkce = true,
+                    PostLogoutRedirectUris = new List<string> { "https://localhost:5010/signout-callback-oidc" }
                 }
             };
     }
